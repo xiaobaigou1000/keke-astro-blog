@@ -1,0 +1,36 @@
+---
+import { getCollection } from "astro:content";
+import BlogCard from "../../components/BlogCard.astro";
+import BlogBaseLayout from "../../layouts/BlogBaseLayout.astro";
+
+const posts = await getCollection("blog", ({ data }) => {
+    return data.categories !== undefined && data.categories.length > 0;
+});
+const postCategories = posts.flatMap((item) => item.data.categories);
+const uniqueCategories = [...new Set(postCategories)];
+---
+
+<BlogBaseLayout>
+    <div class="flex flex-row">
+        <div class="ctg-dp-in-left mt-12 px-3">
+            <h3 class="text-center">Categories</h3>
+            <div class="mt-6">{uniqueCategories.map((item) =>
+                    //TODO user clicked, And replace the right-hand side by Category
+                    <h5><a onclick="">{item}</a></h5>
+                    <hr/>
+            )}</div>
+        </div>
+        <div class="columns-1 mx-auto ctg-dp-in-right">
+            {posts.map((post) => <BlogCard post={post} />)}
+        </div>
+    </div>
+</BlogBaseLayout>
+
+<style>
+    .ctg-dp-in-left {
+        flex: 1 200px;
+    }
+    .ctg-dp-in-right {
+        flex: 2 500px;
+    }
+</style>

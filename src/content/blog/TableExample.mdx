@@ -1,0 +1,51 @@
+---
+title: Table Example
+description: An example to show different tables, for checking table css on mobile.
+categories:
+    - Markdown
+    - Table CSS
+pubDate: Sat Aug 10 19:29:18 CST 2024
+---
+
+## Normal Table
+
+| Title 1 | Title 2 | Title 3 |
+| ------- | ------- | ------- |
+| Cell 1  | Cell 2  | Cell 3  |
+
+## Table with Long Cell
+
+| Title 1     | Title 2                                                   |
+| ----------- | --------------------------------------------------------- |
+| Normal Cell | Longgggggggggggggggggggggggggggggggggggggggggggggggg Cell |
+| Normal Cell | Longgggggggggggggggggggggggggggggggggggggggggggggggg Cell |
+| Normal Cell | Longgggggggggggggggggggggggggggggggggggggggggggggggg Cell |
+| Normal Cell | Longgggggggggggggggggggggggggggggggggggggggggggggggg Cell |
+| Normal Cell | Longgggggggggggggggggggggggggggggggggggggggggggggggg Cell |
+
+## Code Block
+
+```c++ title="Hello.c"
+#include <iostream>
+#include <vector>
+#include <stdexcept>
+
+int main() {
+    try {
+        std::vector<int> vec{3, 4, 3, 1};
+        int i{vec.at(4)}; // Throws an exception, std::out_of_range (indexing for vec is from 0-3 not 1-4)
+    }
+    // An exception handler, catches std::out_of_range, which is thrown by vec.at(4)
+    catch (const std::out_of_range &e) {
+        std::cerr << "Accessing a non-existent element: " << e.what() << '\n';
+    }
+    // To catch any other standard library exceptions (they derive from std::exception)
+    catch (const std::exception &e) {
+        std::cerr << "Exception thrown: " << e.what() << '\n';
+    }
+    // Catch any unrecognised exceptions (i.e. those which don't derive from std::exception)
+    catch (...) {
+        std::cerr << "Some fatal error\n";
+    }
+}
+```

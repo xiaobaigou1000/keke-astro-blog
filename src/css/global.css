@@ -1,0 +1,198 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* --- Standard Parts --- */
+
+body {
+    font-family: "Monserrat", sans-serif;
+    @apply text-base;
+    @apply font-normal;
+    @apply text-pureBlack-default;
+    @apply min-w-80;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    @apply my-3;
+    @apply font-bold;
+    @apply text-pureGray-slate;
+}
+
+h1 {
+    @apply text-4xl;
+}
+
+h2 {
+    @apply text-3xl;
+}
+
+h3 {
+    @apply text-2xl;
+}
+
+h4 {
+    @apply text-lg;
+}
+
+/* --- Markdown Specific Parts --- */
+
+blockquote {
+    @apply flex;
+    @apply flex-col;
+    @apply bg-pureGray-default;
+    @apply my-1.5;
+    @apply px-3;
+    @apply pt-1;
+    @apply rounded-md;
+}
+
+blockquote > p:before {
+    content: "";
+    @apply px-0.5;
+    @apply mr-1;
+    @apply bg-pureGray-slate;
+}
+
+blockquote > * > blockquote {
+    @apply bg-transparent;
+}
+
+main > p > img {
+    @apply mx-auto;
+    @apply max-w-[50%];
+}
+
+a:not(.card-blog a, .menu-list a) {
+    @apply inline-block;
+    @apply transition-all duration-150;
+    @apply leading-4;
+}
+
+a:after:not(.card-blog a:after, .menu-list a:after) {
+    content: "";
+    @apply block;
+    @apply h-0.5;
+    @apply w-full;
+    @apply bg-pureOrange-default;
+    @apply translate-y-1;
+    @apply opacity-0;
+    @apply transition-all duration-150;
+}
+
+a:hover:not(.card-blog a:hover, .menu-list a:hover),
+a:focus-visible:not(.card-blog a:focus-visible, .menu-list a:focus-visible) {
+    @apply text-pureOrange-700;
+    @apply opacity-90;
+}
+
+a:hover:after:not(.card-blog a:hover:after, .menu-list a:hover:after),
+a:focus-visible:after:not(.card-blog a:focus-visible:after, .menu-list a:focus-visible:after) {
+    @apply translate-y-0;
+    @apply opacity-100;
+}
+
+main ul {
+    @apply list-disc;
+    @apply ml-6;
+}
+
+main ol {
+    @apply list-decimal;
+    @apply ml-6;
+}
+
+.contains-task-list {
+    @apply list-none;
+    @apply ml-0;
+}
+
+table {
+    @apply block;
+    @apply max-w-full;
+    @apply w-max;
+    @apply my-4;
+    @apply overflow-x-auto;
+    @apply border-collapse;
+    @apply mx-auto;
+    @apply rounded-lg;
+}
+
+table > thead {
+    @apply bg-pureGray-default;
+    @apply text-pureBlack-default;
+}
+
+table > tbody {
+    @apply text-pureGray-slate;
+    @apply border-y-2 border-neutral-800;
+}
+
+table > tbody > tr {
+    @apply even:bg-pureWhite-blue;
+}
+
+td,
+th {
+    padding: 6px 13px;
+}
+
+main hr + *,
+main * + hr {
+    @apply mt-3;
+}
+
+main hr + hr {
+    @apply mt-0;
+}
+
+details {
+    @apply bg-pureGray-default;
+    @apply rounded-lg;
+    @apply shadow-blueGray-100;
+    @apply my-2;
+    @apply select-none;
+    @apply transition-all duration-200;
+}
+
+details > summary {
+    @apply p-4;
+    @apply cursor-pointer;
+}
+
+details > p {
+    @apply p-4;
+    @apply select-text;
+}
+
+pre {
+    @apply rounded;
+    @apply px-6 py-5;
+    @apply bg-pureWhite-lightSmoke;
+    @apply rounded-md;
+}
+
+.expressive-code {
+    @apply my-2;
+}
+
+button {
+    @apply relative;
+    @apply font-black;
+    @apply px-8 py-3;
+    @apply bg-pureOrange-300;
+    @apply border-transparent border-2 border-solid;
+    @apply rounded-full;
+    @apply text-pureWhite-default;
+    @apply transition-all duration-200;
+}
+button:hover,
+button:focus-visible {
+    @apply bg-pureWhite-100;
+    @apply border-pureOrange-default border-2 border-solid;
+    @apply text-pureOrange-default;
+}

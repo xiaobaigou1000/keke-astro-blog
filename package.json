@@ -19,7 +19,9 @@
     "@astrojs/mdx": "4.3.0",
     "@astrojs/rss": "4.0.11",
     "@astrojs/sitemap": "3.4.1",
+    "@astrojs/tailwind": "^6.0.2",
     "astro": "5.10.1",
+    "astro-expressive-code": "^0.41.3",
     "typescript": "5.8.3"
   },
   "devDependencies": {
@@ -31,7 +33,7 @@
     "cf-typegen": "wrangler types",
     "check": "astro build && tsc && wrangler deploy --dry-run",
     "deploy": "wrangler deploy",
-    "dev": "astro dev",
+    "dev": "astro dev --host",
     "preview": "astro build && wrangler dev"
   },
   "type": "module"

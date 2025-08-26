@@ -1,21 +1,73 @@
 ---
-import { type CollectionEntry, getCollection } from 'astro:content';
-import BlogPost from '../../layouts/BlogPost.astro';
-import { render } from 'astro:content';
+import { type CollectionEntry, getCollection } from "astro:content";
+import BlogBaseLayout from "../../layouts/BlogBaseLayout.astro";
 
 export async function getStaticPaths() {
-	const posts = await getCollection('blog');
-	return posts.map((post) => ({
-		params: { slug: post.id },
-		props: post,
-	}));
+    const posts = await getCollection("blog");
+    return posts.map((post) => ({
+        params: { slug: post.slug },
+        props: post,
+    }));
 }
-type Props = CollectionEntry<'blog'>;
+type Props = CollectionEntry<"blog">;
 
 const post = Astro.props;
-const { Content } = await render(post);
+const { Content, headings } = await post.render();
 ---
 
-<BlogPost {...post.data}>
-	<Content />
-</BlogPost>
+<BlogBaseLayout pageTitle={post.data.title}>
+    <div class="my-10">
+        <div
+            class="h-52 bg-[center_top_30%] bg-cover bg-blend-multiply bg-pureGray-default"
+            style={{ backgroundImage: "url(" + post.data.heroImage + ")" }}>
+        </div>
+        <h3 class="text-center -mt-32 mb-32 text-pureWhite-100 shadow-pureBlack-default drop-shadow-lg">
+            <a href="/blog">Blog</a> /
+            <a
+                href={"/category/" +
+                    (post.data.categories !== undefined && post.data.categories.length > 0
+                        ? post.data.categories[0]
+                        : "")}>
+                {
+                    post.data.categories !== undefined && post.data.categories.length > 0 ? post.data.categories[0] : ""
+                }</a
+            > / <a href={"/blog/" + post.slug}>{post.data.title}</a>
+        </h3>
+    </div>
+    <div>
+        <h1>Headings</h1>
+        <ul>
+            {
+                headings.map((item) => {
+                    switch (item.depth) {
+                        case 1:
+                            return (
+                                <li>
+                                    <h1>{item.text}</h1>
+                                </li>
+                            );
+                        case 2:
+                            return (
+                                <li>
+                                    <h2>{item.text}</h2>
+                                </li>
+                            );
+                        case 3:
+                            return (
+                                <li>
+                                    <h3>{item.text}</h3>
+                                </li>
+                            );
+                        default:
+                            return (
+                                <li>
+                                    <h4>{item.text}</h4>
+                                </li>
+                            );
+                    }
+                })
+            }
+        </ul>
+    </div>
+    <Content />
+</BlogBaseLayout>

@@ -1,0 +1,28 @@
+---
+import { getCollection } from "astro:content";
+import ListBaseLayout from "~/layouts/ListBaseLayout.astro";
+import BlogCard from "@components/BlogCard.astro";
+
+export async function getStaticPaths() {
+    const posts = await getCollection("blog", ({ data }) => {
+        return data.categories !== undefined && data.categories.length > 0;
+    });
+    const postCategories = posts.flatMap((item) => item.data.categories);
+    const uniqueCategories = [...new Set(postCategories)];
+    return uniqueCategories.map((item) => {
+        return { params: { path: item } };
+    });
+}
+
+const { path } = Astro.params;
+
+const postList = await getCollection("blog", ({ data }) => {
+    return data.categories !== undefined && data.categories.length > 0 && data.categories.includes(path!);
+});
+---
+
+<ListBaseLayout>
+    <div class="min-h-1 columns-1 lg:columns-2 gap-6 lg:gap-8 mx-auto">
+        {postList.map((post) => <BlogCard post={post} />)}
+    </div>
+</ListBaseLayout>

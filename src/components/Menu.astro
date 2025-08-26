@@ -1,0 +1,50 @@
+---
+export interface NavMenu {
+    name: string;
+    link: string;
+}
+
+type Props = {
+    items: NavMenu[];
+};
+
+const { items } = Astro.props;
+---
+
+<nav class="transition duration-300 font-black max-md:mt-3.5">
+    <ul class="flex flex-row gap-2.5 menu-list">
+        {
+            items.map((item) => (
+                <li>
+                    <a href={item.link}>{item.name}</a>
+                </li>
+            ))
+        }
+    </ul>
+</nav>
+
+<style>
+    a {
+        @apply text-pureGray-slate;
+        @apply transition-all duration-200;
+    }
+    a:hover,
+    a:focus {
+        @apply bg-transparent;
+    }
+    a:after {
+        content: "";
+        @apply block;
+        @apply h-0.5;
+        @apply bg-orange-500;
+        @apply w-full;
+        @apply translate-y-1;
+        @apply opacity-0;
+        @apply transition-all duration-200;
+    }
+    a:hover:after,
+    a:focus:after {
+        @apply translate-y-0;
+        @apply opacity-100;
+    }
+</style>
